@@ -1,105 +1,229 @@
-// =============================================================================
-// NEOBRUTALISM — VARIABLES
-// =============================================================================
-// Design System: Raw, bold, unapologetic. Thick borders. Hard shadows. No blur.
-// Font Stack  : Space Grotesk (display/body) + Fira Code (mono)
-// =============================================================================
+$theme: "brite" !default;
 
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
 
-// -----------------------------------------------------------------------------
-// TYPOGRAPHY
-// -----------------------------------------------------------------------------
+$blue:    #61bcff !default;
+$indigo:  #828df9 !default;
+$purple:  #be82fa !default;
+$pink:    #ea4998 !default;
+$red:     #f56565 !default;
+$orange:  #fa984a !default;
+$yellow:  #ffc700 !default;
+$green:   #68d391 !default;
+$teal:    #2ed3be !default;
+$cyan:    #22d2ed !default;
+$lime:    #a2e436 !default;
 
-$font-primary    : 'Space Grotesk', sans-serif;
-$font-mono       : 'Fira Code', 'Space Mono', monospace;
+$primary:       $lime !default;
+$secondary:     $white !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-200 !default;
+$dark:          $black !default;
 
-$font-size-base  : 1rem;        // 16px
-$font-weight-normal : 400;
-$font-weight-medium : 500;
-$font-weight-bold   : 700;
+// $min-contrast-ratio:   1.75 !default;
 
-$line-height-base : 1.5;
-$letter-spacing-tight : -0.02em;
-$letter-spacing-wide  :  0.04em;
+$spacer: 1rem !default;
 
+// Body
 
-// -----------------------------------------------------------------------------
-// COLOR PALETTE
-// Neobrutalism core: high-contrast, flat, punchy accent colors
-// -----------------------------------------------------------------------------
+// Links
 
-// Base
-$neo-white       : #FAFAF8;     // Slightly warm white — not sterile
-$neo-black       : #0D0D0D;     // Almost black — deeper than #000
-$neo-border      : #0D0D0D;     // Border is always full black
+$link-color:                              $black !default;
 
-// Accents (pick one dominant per project, rest as utility)
-$neo-yellow      : #FFE500;     // Hero accent — classic neobrutalism
-$neo-red         : #FF3B30;
-$neo-blue        : #2D6EFF;
-$neo-green       : #00C853;
-$neo-pink        : #FF2D78;
-$neo-purple      : #7B2FFF;
-$neo-orange      : #FF6B00;
+// Components
 
-// Surfaces
-$neo-bg          : $neo-white;
-$neo-surface     : #FFFFFF;
-$neo-surface-alt : #F0EFE9;     // Slightly toned bg for cards, inputs
+$border-radius:               .375rem !default;
+$border-radius-sm:            .25rem !default;
+$border-radius-lg:            .5rem !default;
 
-// Text
-$neo-text        : $neo-black;
-$neo-text-muted  : #555555;
+$component-active-color:      $black !default;
+// $component-active-bg:         $black !default;
 
-// Primary brand color (swap freely)
-$neo-primary     : $neo-yellow;
-$neo-primary-fg  : $neo-black;  // Text ON primary bg
+$focus-ring-width:      1px !default;
+$focus-ring-opacity:    1 !default;
+$focus-ring-color:      $black !default;
 
+// Fonts
 
-// -----------------------------------------------------------------------------
-// BORDER & SHADOW — The soul of neobrutalism
-// -----------------------------------------------------------------------------
+$font-size-base:              .875rem !default;
+$font-size-sm:                $font-size-base * .875 !default;
 
-$neo-border-width  : 2px;
-$neo-border-width-thick : 3px;
+$lead-font-weight:            400 !default;
 
-$neo-border-style  : #{$neo-border-width} solid #{$neo-border};
-$neo-border-thick  : #{$neo-border-width-thick} solid #{$neo-border};
+$headings-font-weight:        500 !default;
 
-// Hard drop shadow — NO blur radius
-$neo-shadow-sm   : 3px 3px 0px #{$neo-black};
-$neo-shadow-md   : 5px 5px 0px #{$neo-black};
-$neo-shadow-lg   : 8px 8px 0px #{$neo-black};
-$neo-shadow-xl   : 12px 12px 0px #{$neo-black};
+$hr-border-width:             2px !default;
+$hr-opacity:                  1 !default;
 
-// Hover — shadow shrinks, element shifts slightly
-$neo-shadow-hover-sm : 1px 1px 0px #{$neo-black};
-$neo-shadow-hover-md : 2px 2px 0px #{$neo-black};
+// Tables
 
-// Offset for hover movement to match shadow delta
-$neo-hover-translate-sm : translate(2px, 2px);
-$neo-hover-translate-md : translate(3px, 3px);
+$table-cell-padding-y:        .75rem !default;
+$table-cell-padding-x:        .75rem !default;
 
+$table-border-width:          1px !default;
+$table-border-color:          $black !default;
 
-// -----------------------------------------------------------------------------
-// SPACING
-// -----------------------------------------------------------------------------
+$table-hover-bg-factor:       0 !default;
 
-$neo-radius      : 0px;         // Zero radius by default — hard corners
-$neo-radius-sm   : 2px;         // Subtle rounding (optional, use sparingly)
+$table-border-factor:         1 !default;
 
+$table-bg-scale:              0% !default;
 
-// -----------------------------------------------------------------------------
-// TRANSITION
-// -----------------------------------------------------------------------------
+$table-variants: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+) !default;
 
-$neo-transition  : all 0.12s ease;    // Fast & snappy, not floaty
+// Buttons + Forms
 
+$input-btn-padding-y:         .5rem !default;
+$input-btn-padding-x:         1rem !default;
 
-// -----------------------------------------------------------------------------
-// Z-INDEX
-// -----------------------------------------------------------------------------
+$input-btn-padding-y-sm:      .25rem !default;
+$input-btn-padding-x-sm:      .75rem !default;
+$input-btn-font-size-sm:      $font-size-sm !default;
 
-$neo-z-dropdown  : 1000;
-$neo-z-modal     : 1050;
-$neo-z-toast     : 1100;
+$input-btn-padding-y-lg:      .75rem !default;
+$input-btn-padding-x-lg:      1.25rem !default;
+$input-btn-font-size-lg:      $font-size-base !default;
+
+$input-btn-border-width:      2px !default;
+
+// Buttons
+
+$btn-border-width:            2px !default;
+
+// Forms
+
+$form-label-font-weight:                $headings-font-weight !default;
+
+$input-focus-border-color:              $black !default;
+
+$form-check-input-checked-border-color:   $black !default;
+
+$form-range-track-height:         .6rem !default;
+
+$form-range-thumb-width:                   1.2rem !default;
+$form-range-thumb-height:                  $form-range-thumb-width !default;
+$form-range-thumb-border:                  2px solid $black !default;
+$form-range-thumb-box-shadow:              none !default;
+$form-range-thumb-disabled-bg:             $light !default;
+
+// Dropdowns
+
+// $dropdown-link-hover-color:     $white !default;
+// $dropdown-link-hover-bg:        $primary !default;
+
+// Navs
+
+$nav-link-color:                    $black !default;
+$nav-link-hover-color:              $black !default;
+
+$nav-tabs-link-hover-border-color:  transparent !default;
+
+// Navbar
+
+$navbar-padding-y:                  $spacer * .75 !default;
+$navbar-padding-x:                  null !default;
+
+$navbar-nav-link-padding-x:         1rem !default;
+
+$navbar-light-color:                $black !default;
+$navbar-light-hover-color:          $black !default;
+$navbar-light-active-color:         $black !default;
+$navbar-light-disabled-color:       rgba($black, .3) !default;
+$navbar-light-icon-color:           $black !default;
+$navbar-light-toggler-border-color: $black !default;
+
+$navbar-dark-color:                $white !default;
+$navbar-dark-hover-color:          $white !default;
+$navbar-dark-active-color:         $white !default;
+$navbar-dark-disabled-color:       rgba($white, .3) !default;
+$navbar-dark-icon-color:           $white !default;
+$navbar-dark-toggler-border-color: $white !default;
+
+// Dropdowns
+
+$dropdown-border-color:             $black !default;
+$dropdown-border-width:             2px !default;
+
+$dropdown-link-hover-bg:            $primary !default;
+
+$dropdown-header-color:             $black !default;
+
+// Pagination
+
+$pagination-color:                  $black !default;
+$pagination-hover-color:            $black !default;
+$pagination-hover-bg:               transparent !default;
+$pagination-active-border-color:    $black !default;
+
+// Cards
+
+$card-border-color:                 $black !default;
+
+// Accordion
+
+$accordion-button-active-bg:              $primary !default;
+$accordion-button-active-color:           $black !default;
+
+// Tooltips
+
+$tooltip-opacity:                   1 !default;
+
+// Popovers
+
+$popover-border-color:              $black !default;
+
+// Toasts
+
+$toast-border-color:                $black !default;
+$toast-box-shadow:                  3px 3px 0 0 $black !default;
+
+$toast-header-color:                $black !default;
+
+// Badges
+
+$badge-color:                       $black !default;
+
+// Modals
+
+$modal-content-border-color:        $black !default;
+
+// Alerts
+
+// List group
+
+$list-group-active-border-color:    $black !default;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y:              .5rem !default;
+$breadcrumb-padding-x:              1rem !default;
+$breadcrumb-divider-color:          $black !default;
+$breadcrumb-active-color:           $black !default;
+$breadcrumb-border-radius:          $border-radius-lg !default;
+
+// Close
+
+$btn-close-opacity:          1 !default;
+$btn-close-hover-opacity:    1 !default;
