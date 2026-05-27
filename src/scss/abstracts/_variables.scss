@@ -1,0 +1,105 @@
+// =============================================================================
+// NEOBRUTALISM — VARIABLES
+// =============================================================================
+// Design System: Raw, bold, unapologetic. Thick borders. Hard shadows. No blur.
+// Font Stack  : Space Grotesk (display/body) + Fira Code (mono)
+// =============================================================================
+
+
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY
+// -----------------------------------------------------------------------------
+
+$font-primary    : 'Space Grotesk', sans-serif;
+$font-mono       : 'Fira Code', 'Space Mono', monospace;
+
+$font-size-base  : 1rem;        // 16px
+$font-weight-normal : 400;
+$font-weight-medium : 500;
+$font-weight-bold   : 700;
+
+$line-height-base : 1.5;
+$letter-spacing-tight : -0.02em;
+$letter-spacing-wide  :  0.04em;
+
+
+// -----------------------------------------------------------------------------
+// COLOR PALETTE
+// Neobrutalism core: high-contrast, flat, punchy accent colors
+// -----------------------------------------------------------------------------
+
+// Base
+$neo-white       : #FAFAF8;     // Slightly warm white — not sterile
+$neo-black       : #0D0D0D;     // Almost black — deeper than #000
+$neo-border      : #0D0D0D;     // Border is always full black
+
+// Accents (pick one dominant per project, rest as utility)
+$neo-yellow      : #FFE500;     // Hero accent — classic neobrutalism
+$neo-red         : #FF3B30;
+$neo-blue        : #2D6EFF;
+$neo-green       : #00C853;
+$neo-pink        : #FF2D78;
+$neo-purple      : #7B2FFF;
+$neo-orange      : #FF6B00;
+
+// Surfaces
+$neo-bg          : $neo-white;
+$neo-surface     : #FFFFFF;
+$neo-surface-alt : #F0EFE9;     // Slightly toned bg for cards, inputs
+
+// Text
+$neo-text        : $neo-black;
+$neo-text-muted  : #555555;
+
+// Primary brand color (swap freely)
+$neo-primary     : $neo-yellow;
+$neo-primary-fg  : $neo-black;  // Text ON primary bg
+
+
+// -----------------------------------------------------------------------------
+// BORDER & SHADOW — The soul of neobrutalism
+// -----------------------------------------------------------------------------
+
+$neo-border-width  : 2px;
+$neo-border-width-thick : 3px;
+
+$neo-border-style  : #{$neo-border-width} solid #{$neo-border};
+$neo-border-thick  : #{$neo-border-width-thick} solid #{$neo-border};
+
+// Hard drop shadow — NO blur radius
+$neo-shadow-sm   : 3px 3px 0px #{$neo-black};
+$neo-shadow-md   : 5px 5px 0px #{$neo-black};
+$neo-shadow-lg   : 8px 8px 0px #{$neo-black};
+$neo-shadow-xl   : 12px 12px 0px #{$neo-black};
+
+// Hover — shadow shrinks, element shifts slightly
+$neo-shadow-hover-sm : 1px 1px 0px #{$neo-black};
+$neo-shadow-hover-md : 2px 2px 0px #{$neo-black};
+
+// Offset for hover movement to match shadow delta
+$neo-hover-translate-sm : translate(2px, 2px);
+$neo-hover-translate-md : translate(3px, 3px);
+
+
+// -----------------------------------------------------------------------------
+// SPACING
+// -----------------------------------------------------------------------------
+
+$neo-radius      : 0px;         // Zero radius by default — hard corners
+$neo-radius-sm   : 2px;         // Subtle rounding (optional, use sparingly)
+
+
+// -----------------------------------------------------------------------------
+// TRANSITION
+// -----------------------------------------------------------------------------
+
+$neo-transition  : all 0.12s ease;    // Fast & snappy, not floaty
+
+
+// -----------------------------------------------------------------------------
+// Z-INDEX
+// -----------------------------------------------------------------------------
+
+$neo-z-dropdown  : 1000;
+$neo-z-modal     : 1050;
+$neo-z-toast     : 1100;

@@ -1,7 +1,1089 @@
+// =============================================================================
+// NEOBRUTALISM — MAIN
+// Bootstrap Component Overrides
+// =============================================================================
+// Import order:
+//   1. Bootstrap functions (required first)
+//   2. Our variables (overrides Bootstrap's $variables before they compile)
+//   3. Bootstrap variables + mixins
+//   4. Bootstrap components
+//   5. Our custom overrides
+// =============================================================================
+
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+@import "bootstrap/scss/bootstrap";
+
+// -- Bootstrap variable overrides (must come BEFORE bootstrap import) ---------
+
+$font-family-sans-serif : 'Space Grotesk', sans-serif;
+$font-family-monospace  : 'Fira Code', 'Space Mono', monospace;
+$font-size-base         : 1rem;
+$font-weight-normal     : 400;
+$font-weight-bold       : 700;
+$line-height-base       : 1.5;
+$headings-font-weight   : 700;
+$headings-letter-spacing: -0.02em;
+
+$body-bg                : #FAFAF8;
+$body-color             : #0D0D0D;
+
+$border-radius          : 0;
+$border-radius-sm       : 0;
+$border-radius-lg       : 0;
+$border-radius-pill     : 0;
+$border-radius-circle   : 0;
+
+$border-color           : #0D0D0D;
+$border-width           : 2px;
+
+$box-shadow             : 5px 5px 0px #0D0D0D;
+$box-shadow-sm          : 3px 3px 0px #0D0D0D;
+$box-shadow-lg          : 8px 8px 0px #0D0D0D;
+
+$primary                : #FFE500;
+$secondary              : #F0EFE9;
+$success                : #00C853;
+$danger                 : #FF3B30;
+$warning                : #FF6B00;
+$info                   : #2D6EFF;
+$light                  : #F0EFE9;
+$dark                   : #0D0D0D;
+
+$focus-ring-color       : rgba(255, 229, 0, 0.6);
+$focus-ring-width       : 3px;
+$focus-ring-offset      : 2px;
+
+$input-border-color         : #0D0D0D;
+$input-border-width         : 2px;
+$input-focus-border-color   : #0D0D0D;
+$input-focus-box-shadow     : 3px 3px 0px #0D0D0D;
+$input-bg                   : #FFFFFF;
+$input-padding-y            : 0.55rem;
+$input-padding-x            : 0.9rem;
+
+$btn-border-width           : 2px;
+$btn-font-weight            : 700;
+$btn-padding-y              : 0.5rem;
+$btn-padding-x              : 1.25rem;
+
+$card-border-width          : 2px;
+$card-border-color          : #0D0D0D;
+$card-bg                    : #FFFFFF;
+
+$navbar-border-width        : 2px;
+
+$modal-content-border-width : 2px;
+$modal-content-border-color : #0D0D0D;
+$modal-content-box-shadow-xs: 5px 5px 0px #0D0D0D;
+$modal-content-box-shadow-sm: 8px 8px 0px #0D0D0D;
+
+$dropdown-border-color      : #0D0D0D;
+$dropdown-border-width      : 2px;
+$dropdown-box-shadow        : 5px 5px 0px #0D0D0D;
+
+$badge-border-radius        : 0;
+$badge-font-weight          : 700;
+$badge-padding-y            : 0.3em;
+$badge-padding-x            : 0.65em;
+
+$alert-border-width         : 2px;
+$alert-border-radius        : 0;
+
+$list-group-border-color    : #0D0D0D;
+$list-group-border-width    : 2px;
+
+$table-border-color         : #0D0D0D;
+
+$progress-border-radius     : 0;
+$progress-bg                : #F0EFE9;
+$progress-bar-bg            : #FFE500;
+$progress-bar-color         : #0D0D0D;
+
+$tooltip-border-radius      : 0;
+$tooltip-bg                 : #0D0D0D;
+
+$pagination-border-color    : #0D0D0D;
+$pagination-border-width    : 2px;
+
+
+
+
+// =============================================================================
+// GLOBAL BASE
+// =============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #f8f9fa;
-  font-family: system-ui, -apple-system, sans-serif;
-  margin: 0;
-  padding: 2rem;
-  text-align: center;
+  font-family     : $font-primary;
+  background-color: $neo-bg;
+  color           : $neo-text;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family    : $font-primary;
+  font-weight    : $font-weight-bold;
+  letter-spacing : $letter-spacing-tight;
+  color          : $neo-text;
+}
+
+code, kbd, samp, pre {
+  font-family: $font-mono;
+}
+
+a {
+  color           : $neo-text;
+  text-decoration : underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset    : 3px;
+  transition      : $neo-transition;
+
+  &:hover {
+    color           : $neo-text;
+    text-decoration-color: $neo-yellow;
+  }
+}
+
+// =============================================================================
+// BUTTONS
+// =============================================================================
+
+.btn {
+  font-family    : $font-primary;
+  font-weight    : $font-weight-bold;
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+  letter-spacing : 0.01em;
+  transition     : $neo-transition;
+  position       : relative;
+
+  // Primary — yellow fill
+  &.btn-primary {
+    background  : $neo-yellow;
+    color       : $neo-black;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-yellow;
+      color       : $neo-black;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+
+    &:focus-visible {
+      outline    : 3px solid $neo-black;
+      outline-offset: 2px;
+      box-shadow : $neo-shadow-sm;
+    }
+  }
+
+  // Dark filled
+  &.btn-dark {
+    background  : $neo-black;
+    color       : $neo-white;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-black;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+  }
+
+  // White / Light
+  &.btn-light,
+  &.btn-secondary {
+    background  : $neo-surface;
+    color       : $neo-black;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-surface-alt;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+  }
+
+  // Outline variants
+  &.btn-outline-primary {
+    background  : transparent;
+    color       : $neo-black;
+    border-color: $neo-black;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-yellow;
+      color       : $neo-black;
+      border-color: $neo-black;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+  }
+
+  &.btn-outline-dark {
+    background  : transparent;
+    color       : $neo-black;
+    border-color: $neo-black;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-black;
+      color       : $neo-white;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+  }
+
+  // Danger
+  &.btn-danger {
+    background  : $neo-red;
+    color       : $neo-white;
+    border-color: $neo-black;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-red;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+  }
+
+  // Success
+  &.btn-success {
+    background  : $neo-green;
+    color       : $neo-black;
+    border-color: $neo-black;
+    box-shadow  : $neo-shadow-sm;
+
+    &:hover:not(:disabled) {
+      background  : $neo-green;
+      box-shadow  : $neo-shadow-hover-sm;
+      transform   : $neo-hover-translate-sm;
+    }
+
+    &:active:not(:disabled) {
+      box-shadow : 0px 0px 0px $neo-black;
+      transform  : translate(3px, 3px);
+    }
+  }
+
+  // Disabled state (all variants)
+  &:disabled,
+  &.disabled {
+    opacity    : 0.45;
+    box-shadow : none;
+    transform  : none;
+    cursor     : not-allowed;
+  }
+
+  // Sizes
+  &.btn-sm {
+    padding      : 0.3rem 0.85rem;
+    font-size    : 0.82rem;
+  }
+
+  &.btn-lg {
+    padding      : 0.7rem 1.75rem;
+    font-size    : 1.05rem;
+  }
+}
+
+
+// =============================================================================
+// FORMS
+// =============================================================================
+
+.form-control,
+.form-select {
+  @include neo-input;
+  font-size   : $font-size-base;
+}
+
+.form-label {
+  font-family  : $font-primary;
+  font-weight  : $font-weight-bold;
+  font-size    : 0.875rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.4rem;
+  color        : $neo-text;
+}
+
+.form-text {
+  color       : $neo-text-muted;
+  font-size   : 0.8rem;
+}
+
+// Checkbox & Radio
+.form-check-input {
+  border         : $neo-border-thick;
+  border-radius  : $neo-radius;
+  background-color: $neo-surface;
+  transition     : $neo-transition;
+
+  &:checked {
+    background-color: $neo-yellow;
+    border-color    : $neo-black;
+    // Override Bootstrap's SVG icon for checkbox with a black one
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%230D0D0D' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+  }
+
+  &:focus {
+    box-shadow  : $neo-shadow-sm;
+    border-color: $neo-black;
+  }
+}
+
+.form-check-label {
+  font-family : $font-primary;
+  font-weight : $font-weight-medium;
+  cursor      : pointer;
+}
+
+// Invalid & valid states
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: $neo-red;
+  box-shadow  : 3px 3px 0px $neo-red;
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+  border-color: $neo-green;
+  box-shadow  : 3px 3px 0px $neo-green;
+}
+
+.invalid-feedback {
+  font-weight: $font-weight-bold;
+  font-size  : 0.8rem;
+  color      : $neo-red;
+}
+
+.valid-feedback {
+  font-weight: $font-weight-bold;
+  font-size  : 0.8rem;
+  color      : darken($neo-green, 10%);
+}
+
+// Input Group
+.input-group {
+  .input-group-text {
+    font-family    : $font-primary;
+    font-weight    : $font-weight-bold;
+    background     : $neo-surface-alt;
+    border         : $neo-border-thick;
+    border-radius  : $neo-radius;
+    color          : $neo-text;
+  }
+
+  .form-control:not(:first-child) {
+    border-left-width: 0;
+  }
+
+  .form-control:not(:last-child) {
+    border-right-width: 0;
+  }
+}
+
+
+// =============================================================================
+// CARDS
+// =============================================================================
+
+.card {
+  @include neo-box-md;
+  background      : $neo-surface;
+  border-radius   : $neo-radius;
+  overflow        : hidden;
+
+  .card-header {
+    font-family   : $font-primary;
+    font-weight   : $font-weight-bold;
+    background    : $neo-surface-alt;
+    border-bottom : $neo-border-style;
+    padding       : 0.85rem 1.25rem;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  .card-title {
+    font-weight   : $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    margin-bottom : 0.5rem;
+  }
+
+  .card-footer {
+    background    : $neo-surface-alt;
+    border-top    : $neo-border-style;
+  }
+
+  // Hoverable card variant
+  &.card-hover {
+    transition    : $neo-transition;
+    cursor        : pointer;
+
+    &:hover {
+      box-shadow  : $neo-shadow-hover-md;
+      transform   : $neo-hover-translate-md;
+    }
+  }
+
+  // Accent top border variant
+  &.card-accent-top {
+    border-top    : 4px solid $neo-yellow;
+  }
+}
+
+
+// =============================================================================
+// NAVBAR
+// =============================================================================
+
+.navbar {
+  border-bottom   : $neo-border-style;
+  font-family     : $font-primary;
+  font-weight     : $font-weight-bold;
+
+  .navbar-brand {
+    font-weight   : $font-weight-bold;
+    font-size     : 1.25rem;
+    letter-spacing: $letter-spacing-tight;
+    color         : $neo-text;
+
+    &:hover {
+      color       : $neo-text;
+    }
+  }
+
+  .nav-link {
+    font-weight   : $font-weight-medium;
+    color         : $neo-text;
+    position      : relative;
+    padding-bottom: 0.3rem;
+    transition    : $neo-transition;
+
+    &::after {
+      content    : '';
+      position   : absolute;
+      bottom     : 0;
+      left       : 0;
+      width      : 0;
+      height     : 2px;
+      background : $neo-yellow;
+      transition : $neo-transition;
+    }
+
+    &:hover,
+    &.active {
+      color      : $neo-text;
+
+      &::after {
+        width    : 100%;
+      }
+    }
+  }
+
+  // Filled dark navbar variant
+  &.navbar-dark-neo {
+    background    : $neo-black;
+    border-bottom : none;
+
+    .navbar-brand,
+    .nav-link {
+      color       : $neo-white;
+
+      &:hover,
+      &.active {
+        color     : $neo-white;
+      }
+    }
+
+    .nav-link::after {
+      background  : $neo-yellow;
+    }
+  }
+}
+
+
+// =============================================================================
+// BADGES
+// =============================================================================
+
+.badge {
+  font-family    : $font-primary;
+  font-weight    : $font-weight-bold;
+  font-size      : 0.7rem;
+  letter-spacing : $letter-spacing-wide;
+  text-transform : uppercase;
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+
+  &.bg-primary  { background: $neo-yellow  !important; color: $neo-black; }
+  &.bg-dark     { background: $neo-black   !important; color: $neo-white; }
+  &.bg-danger   { background: $neo-red     !important; color: $neo-white; border-color: $neo-black; }
+  &.bg-success  { background: $neo-green   !important; color: $neo-black; border-color: $neo-black; }
+  &.bg-info     { background: $neo-blue    !important; color: $neo-white; border-color: $neo-black; }
+  &.bg-warning  { background: $neo-orange  !important; color: $neo-white; border-color: $neo-black; }
+  &.bg-secondary{ background: $neo-surface-alt !important; color: $neo-black; }
+}
+
+
+// =============================================================================
+// ALERTS
+// =============================================================================
+
+.alert {
+  font-family    : $font-primary;
+  font-weight    : $font-weight-medium;
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+  border-left-width: 5px;
+  box-shadow     : $neo-shadow-sm;
+
+  .alert-heading {
+    font-weight  : $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  &.alert-primary {
+    background   : rgba($neo-yellow, 0.2);
+    border-color : $neo-black;
+    border-left-color: $neo-yellow;
+    color        : $neo-black;
+  }
+
+  &.alert-danger {
+    background   : rgba($neo-red, 0.08);
+    border-color : $neo-black;
+    border-left-color: $neo-red;
+    color        : $neo-black;
+  }
+
+  &.alert-success {
+    background   : rgba($neo-green, 0.1);
+    border-color : $neo-black;
+    border-left-color: $neo-green;
+    color        : $neo-black;
+  }
+
+  &.alert-warning {
+    background   : rgba($neo-orange, 0.1);
+    border-color : $neo-black;
+    border-left-color: $neo-orange;
+    color        : $neo-black;
+  }
+
+  &.alert-info {
+    background   : rgba($neo-blue, 0.08);
+    border-color : $neo-black;
+    border-left-color: $neo-blue;
+    color        : $neo-black;
+  }
+}
+
+
+// =============================================================================
+// MODALS
+// =============================================================================
+
+.modal-content {
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+  box-shadow     : $neo-shadow-lg;
+  background     : $neo-surface;
+
+  .modal-header {
+    border-bottom : $neo-border-style;
+    background    : $neo-surface-alt;
+    padding       : 1rem 1.25rem;
+
+    .modal-title {
+      font-family  : $font-primary;
+      font-weight  : $font-weight-bold;
+      letter-spacing: $letter-spacing-tight;
+    }
+
+    .btn-close {
+      border      : $neo-border-style;
+      border-radius: $neo-radius;
+      opacity     : 1;
+      padding     : 0.4rem;
+      transition  : $neo-transition;
+
+      &:hover {
+        background  : $neo-yellow;
+      }
+    }
+  }
+
+  .modal-footer {
+    border-top    : $neo-border-style;
+    background    : $neo-surface-alt;
+  }
+}
+
+.modal-backdrop.show {
+  opacity         : 0.6;
+}
+
+
+// =============================================================================
+// DROPDOWNS
+// =============================================================================
+
+.dropdown-menu {
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+  box-shadow     : $neo-shadow-md;
+  background     : $neo-surface;
+  padding        : 0.35rem;
+
+  .dropdown-item {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-medium;
+    border-radius: $neo-radius;
+    transition   : $neo-transition;
+    padding      : 0.5rem 0.85rem;
+
+    &:hover,
+    &:focus {
+      background   : $neo-yellow;
+      color        : $neo-black;
+    }
+
+    &.active {
+      background   : $neo-black;
+      color        : $neo-white;
+    }
+  }
+
+  .dropdown-divider {
+    border-top   : $neo-border-style;
+    margin       : 0.35rem 0;
+  }
+
+  .dropdown-header {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-bold;
+    font-size    : 0.7rem;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
+    color        : $neo-text-muted;
+    padding      : 0.4rem 0.85rem;
+  }
+}
+
+
+// =============================================================================
+// TABLES
+// =============================================================================
+
+.table {
+  font-family    : $font-primary;
+  border-color   : $neo-black;
+
+  thead {
+    th {
+      font-weight  : $font-weight-bold;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size    : 0.78rem;
+      background   : $neo-black;
+      color        : $neo-white;
+      border        : none;
+      padding      : 0.75rem 1rem;
+    }
+  }
+
+  tbody {
+    td, th {
+      border-color : $neo-black;
+      padding      : 0.75rem 1rem;
+      vertical-align: middle;
+    }
+
+    tr {
+      transition   : $neo-transition;
+
+      &:hover {
+        background   : rgba($neo-yellow, 0.12);
+      }
+    }
+  }
+
+  &.table-bordered {
+    border         : $neo-border-style;
+
+    td, th {
+      border         : $neo-border-style;
+    }
+  }
+}
+
+
+// =============================================================================
+// PAGINATION
+// =============================================================================
+
+.pagination {
+  .page-link {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-bold;
+    border       : $neo-border-style;
+    color        : $neo-text;
+    background   : $neo-surface;
+    transition   : $neo-transition;
+    margin       : 0 2px;
+    box-shadow   : $neo-shadow-sm;
+
+    &:hover {
+      background   : $neo-yellow;
+      color        : $neo-black;
+      border-color : $neo-black;
+      box-shadow   : $neo-shadow-hover-sm;
+      transform    : $neo-hover-translate-sm;
+      z-index      : 1;
+    }
+
+    &:focus {
+      box-shadow   : $neo-shadow-sm;
+      outline      : 2px solid $neo-yellow;
+    }
+  }
+
+  .page-item.active .page-link {
+    background   : $neo-black;
+    color        : $neo-white;
+    border-color : $neo-black;
+    box-shadow   : none;
+    transform    : none;
+  }
+
+  .page-item.disabled .page-link {
+    opacity      : 0.4;
+    box-shadow   : none;
+    cursor       : not-allowed;
+  }
+}
+
+
+// =============================================================================
+// LIST GROUP
+// =============================================================================
+
+.list-group {
+  border-radius   : $neo-radius;
+  overflow        : hidden;
+
+  .list-group-item {
+    font-family   : $font-primary;
+    font-weight   : $font-weight-medium;
+    border        : $neo-border-style;
+    border-bottom-width: 0;
+    background    : $neo-surface;
+    color         : $neo-text;
+    transition    : $neo-transition;
+
+    &:first-child {
+      border-radius: $neo-radius;
+    }
+
+    &:last-child {
+      border-bottom-width: 2px;
+      border-radius: $neo-radius;
+    }
+
+    &.active {
+      background  : $neo-black;
+      color       : $neo-white;
+      border-color: $neo-black;
+    }
+
+    &.list-group-item-action {
+      &:hover {
+        background  : $neo-yellow;
+        color       : $neo-black;
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// PROGRESS
+// =============================================================================
+
+.progress {
+  background     : $neo-surface-alt;
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+  height         : 1rem;
+  box-shadow     : $neo-shadow-sm;
+  overflow       : visible; // allows shadow to show on bar
+
+  .progress-bar {
+    background   : $neo-yellow;
+    color        : $neo-black;
+    font-family  : $font-mono;
+    font-weight  : $font-weight-bold;
+    font-size    : 0.7rem;
+    border-right : $neo-border-style;
+    transition   : width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+
+// =============================================================================
+// TABS
+// =============================================================================
+
+.nav-tabs {
+  border-bottom  : $neo-border-style;
+  gap            : 2px;
+
+  .nav-link {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-bold;
+    color        : $neo-text-muted;
+    border       : $neo-border-style;
+    border-bottom: none;
+    border-radius: $neo-radius;
+    margin-bottom: -2px;
+    transition   : $neo-transition;
+    background   : $neo-surface-alt;
+
+    &:hover {
+      color      : $neo-text;
+      background : $neo-yellow;
+      border-color: $neo-black;
+    }
+
+    &.active {
+      background : $neo-surface;
+      color      : $neo-text;
+      border-color: $neo-black;
+      border-bottom-color: $neo-surface;
+    }
+  }
+}
+
+.nav-pills {
+  gap            : 6px;
+
+  .nav-link {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-bold;
+    color        : $neo-text;
+    border       : $neo-border-style;
+    border-radius: $neo-radius;
+    transition   : $neo-transition;
+    box-shadow   : $neo-shadow-sm;
+
+    &:hover {
+      background : $neo-surface-alt;
+      box-shadow : $neo-shadow-hover-sm;
+      transform  : $neo-hover-translate-sm;
+    }
+
+    &.active {
+      background : $neo-black;
+      color      : $neo-white;
+      border-color: $neo-black;
+      box-shadow : none;
+      transform  : none;
+    }
+  }
+}
+
+
+// =============================================================================
+// TOOLTIPS
+// =============================================================================
+
+.tooltip {
+  .tooltip-inner {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-bold;
+    font-size    : 0.78rem;
+    background   : $neo-black;
+    color        : $neo-white;
+    border-radius: $neo-radius;
+    border       : $neo-border-style;
+    padding      : 0.35rem 0.7rem;
+    box-shadow   : $neo-shadow-sm;
+  }
+}
+
+
+// =============================================================================
+// ACCORDION
+// =============================================================================
+
+.accordion {
+  border         : $neo-border-style;
+  box-shadow     : $neo-shadow-md;
+
+  .accordion-item {
+    border       : none;
+    border-bottom: $neo-border-style;
+    background   : $neo-surface;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .accordion-button {
+    font-family  : $font-primary;
+    font-weight  : $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    background   : $neo-surface-alt;
+    color        : $neo-text;
+    box-shadow   : none;
+    transition   : $neo-transition;
+
+    &::after {
+      filter     : none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230D0D0D'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    &:not(.collapsed) {
+      background : $neo-yellow;
+      color      : $neo-black;
+      box-shadow : none;
+      border-bottom: $neo-border-style;
+    }
+
+    &:focus {
+      box-shadow : none;
+      outline    : 2px solid $neo-yellow;
+      outline-offset: -2px;
+    }
+  }
+
+  .accordion-body {
+    font-family  : $font-primary;
+    padding      : 1.25rem;
+    background   : $neo-surface;
+  }
+}
+
+
+// =============================================================================
+// TOAST
+// =============================================================================
+
+.toast {
+  font-family    : $font-primary;
+  border         : $neo-border-style;
+  border-radius  : $neo-radius;
+  box-shadow     : $neo-shadow-md;
+  background     : $neo-surface;
+
+  .toast-header {
+    font-weight  : $font-weight-bold;
+    background   : $neo-surface-alt;
+    border-bottom: $neo-border-style;
+    color        : $neo-text;
+
+    .btn-close {
+      border     : $neo-border-style;
+      border-radius: $neo-radius;
+      opacity    : 1;
+
+      &:hover {
+        background: $neo-yellow;
+      }
+    }
+  }
+}
+
+
+// =============================================================================
+// UTILITY CLASSES (Neobrutalism extras)
+// =============================================================================
+
+// Shadows
+.neo-shadow-sm  { box-shadow: $neo-shadow-sm; }
+.neo-shadow-md  { box-shadow: $neo-shadow-md; }
+.neo-shadow-lg  { box-shadow: $neo-shadow-lg; }
+.neo-shadow-xl  { box-shadow: $neo-shadow-xl; }
+
+// Borders
+.neo-border     { border: $neo-border-style; }
+.neo-border-thick { border: $neo-border-thick; }
+
+// Stripe texture
+.neo-stripe     { @include neo-stripe; }
+
+// Highlight text background
+.neo-highlight  {
+  background         : $neo-yellow;
+  padding            : 0.05em 0.25em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+// Section divider
+.neo-divider {
+  border     : none;
+  border-top : $neo-border-thick;
+  margin     : 2rem 0;
+}
+
+// Monospace text
+.neo-mono {
+  font-family : $font-mono;
+  font-size   : 0.9em;
+}
+
+// Uppercase label
+.neo-label {
+  @include neo-label;
+}
+
+// Interactive card (add to any .card)
+.neo-card-interactive {
+  cursor     : pointer;
+  transition : $neo-transition;
+
+  &:hover {
+    box-shadow : $neo-shadow-hover-md;
+    transform  : $neo-hover-translate-md;
+  }
 }
