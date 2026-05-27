@@ -1,7 +1,8 @@
-@use 'abstracts/variables' as *;
-@use 'abstracts/mixins' as *;
+@import 'abstracts/variables';
 @import 'bootstrap/scss/bootstrap';
+@import 'abstracts/mixins';
 
+// Variables Root
 :root {
   --#{$prefix}border-width: 2px;
   --#{$prefix}border-color: #000;
@@ -12,13 +13,11 @@
   --#{$prefix}border-color: #000;
 }
 
-@mixin btn-shadow() {
-  box-shadow: 3px 3px 0 0 var(--#{$prefix}border-color);
-}
-
 .table {
   border: 2px solid $black;
 }
+
+// Navbar
 
 .navbar {
   $navbar-border-width: 2px;
@@ -44,6 +43,8 @@
     --bs-border-width: 2px;
   }
 }
+
+// Buttons
 
 .btn {
   margin: 3px 0 0 3px;
@@ -145,9 +146,13 @@
   color: #fff;
 }
 
+// Typography
+
 a {
   font-weight: $headings-font-weight;
 }
+
+// Forms
 
 .form-range {
   &:not([disabled])::-moz-range-progress {
@@ -186,6 +191,8 @@ a {
     box-shadow: none;
   }
 }
+
+// Navs
 
 .nav {
   &:not(.nav-tabs, .nav-pills) {
@@ -310,6 +317,8 @@ a {
     }
   }
 }
+
+// Indicators
 
 .alert {
   color: $black;
