@@ -1,0 +1,87 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+@mixin elevated-card($elev: 1) {
+  box-shadow: 0 #{0.25 * $elev}rem #{0.5 * $elev}rem
+    rgba(36, 48, 63, 0.08 * $elev);
+  border-radius: $app-border-radius;
+}
+
+.card-custom {
+  @include elevated-card(1.2);
+
+  .card-title {
+    color: $app-primary;
+    font-weight: 700;
+  }
+
+  &--highlight {
+    border: 1px solid $app-accent;
+    background: color.scale($app-surface, $lightness: 6%);
+  }
+}
+
+.btn-float {
+  background: $app-accent;
+  color: white;
+  transition: transform 120ms ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &.secondary {
+    background: $app-secondary;
+  }
+}
+
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Bootstrap component customizations (5 types): button, card, navbar, modal, alert */
+
+.btn-custom-primary {
+  background: linear-gradient(90deg, $app-accent, $app-primary);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: calc($app-border-radius / 2);
+  box-shadow: 0 6px 18px rgba(29, 78, 216, 0.12);
+}
+
+.card-custom {
+  background: linear-gradient(
+    180deg,
+    white,
+    color.scale($app-surface, $lightness: -2%)
+  );
+  border: 1px solid color.scale($app-primary, $lightness: 60%);
+}
+
+.navbar-custom {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 118, 110, 0.06),
+    rgba(29, 78, 216, 0.04)
+  );
+  border-bottom: 1px solid color.scale($app-primary, $lightness: 80%);
+}
+
+.modal-custom .modal-content {
+  border-radius: calc($app-border-radius / 1.5);
+  box-shadow: 0 20px 40px rgba(36, 48, 63, 0.12);
+  border: 1px solid color.scale($app-primary, $lightness: 78%);
+}
+
+.alert-custom {
+  background: linear-gradient(
+    90deg,
+    color.scale($app-secondary, $lightness: 90%),
+    white
+  );
+  border: 1px solid color.scale($app-secondary, $lightness: 60%);
+}

@@ -1,0 +1,20 @@
+@use 'sass:color';
+
+$app-primary: #0f766e;
+$app-secondary: #f97316;
+$app-accent: #1d4ed8;
+$app-surface: #fffaf3;
+$app-body-bg: #f5efe6;
+$app-body-color: #24303f;
+$app-font-sans:
+  'Space Grotesk',
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  sans-serif;
+$app-border-radius: 1rem;
+$app-border-radius-lg: 1.5rem;
+
+$app-primary-soft: color.mix(white, $app-primary, 84%);
+$app-secondary-soft: color.mix(white, $app-secondary, 84%);

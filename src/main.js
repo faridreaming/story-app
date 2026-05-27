@@ -1,17 +1,30 @@
 import * as bootstrap from 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './components/nav-bar.js'
+import './pages/dashboard.js'
+import './pages/add-story.js'
+import './pages/about-dev.js'
+import './components/footer-app.js'
+import './styles/main.scss'
 
-document.querySelector('#app').innerHTML = `
-  <main class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8 text-center">
-        
-        <div class="card p-5 mb-4">
-          <h1 class="display-5 fw-bold mb-3">Selamat Datang! 🚀</h1>
-          <p class="lead">Navbar dengan Offcanvas sudah terpasang di atas.</p>
-          <p>Coba kecilkan ukuran browser atau buka inspect element mode *mobile* untuk melihat tombol hamburger Offcanvas bekerja.</p>
-        </div>
-        
-      </div>
-    </div>
-  </main>
+const app = document.querySelector('#app')
+
+app.innerHTML = `
+  <nav-bar></nav-bar>
+  <div id="page"></div>
 `
+
+function renderRoute() {
+  const page = app.querySelector('#page')
+  const hash = window.location.hash || '#'
+  if (hash.startsWith('#add')) {
+    page.innerHTML = '<add-story-page></add-story-page>'
+  } else if (hash.startsWith('#about')) {
+    page.innerHTML = '<about-dev></about-dev>'
+  } else {
+    page.innerHTML = '<dashboard-page></dashboard-page>'
+  }
+}
+
+window.addEventListener('hashchange', renderRoute)
+renderRoute()
