@@ -6,6 +6,7 @@ class RegisterPage extends LitElement {
     return {
       loading: { type: Boolean },
       error: { type: String },
+      showPassword: { type: Boolean },
     }
   }
 
@@ -13,6 +14,7 @@ class RegisterPage extends LitElement {
     super()
     this.loading = false
     this.error = ''
+    this.showPassword = false
   }
 
   createRenderRoot() {
@@ -42,6 +44,10 @@ class RegisterPage extends LitElement {
     } finally {
       this.loading = false
     }
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword
   }
 
   render() {
@@ -80,15 +86,27 @@ class RegisterPage extends LitElement {
 
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    minlength="8"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Password wajib diisi dan minimal 8 karakter.
+                  <div class="input-group">
+                    <input
+                      id="password"
+                      type=${this.showPassword ? 'text' : 'password'}
+                      class="form-control"
+                      minlength="8"
+                      required
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      @click=${this.togglePassword}
+                      title=${this.showPassword
+                        ? 'Sembunyikan password'
+                        : 'Tampilkan password'}
+                    >
+                      ${this.showPassword ? '🙈' : '👁️'}
+                    </button>
+                    <div class="invalid-feedback">
+                      Password wajib diisi dan minimal 8 karakter.
+                    </div>
                   </div>
                 </div>
 

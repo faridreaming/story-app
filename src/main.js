@@ -1,4 +1,4 @@
-import * as bootstrap from 'bootstrap'
+import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './components/nav-bar.js'
 import './pages/dashboard.js'

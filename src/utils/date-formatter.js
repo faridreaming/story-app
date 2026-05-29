@@ -28,6 +28,7 @@ export function formatDate(isoDateString, locale = 'id') {
   try {
     return new Intl.DateTimeFormat(bcp47Locale, options).format(date)
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error formatting date:', error)
     return date.toISOString()
   }
