@@ -1,8 +1,15 @@
 import { LitElement, html } from 'lit'
 
 class StoryForm extends LitElement {
+  static get properties() {
+    return {
+      loading: { type: Boolean },
+    }
+  }
+
   constructor() {
     super()
+    this.loading = false
   }
 
   createRenderRoot() {
@@ -10,25 +17,14 @@ class StoryForm extends LitElement {
   }
 
   firstUpdated() {
-    // enhance client-side bootstrap validation
     this.form = this.querySelector('form')
     this.form.addEventListener('submit', this.onSubmit.bind(this))
-  }
-
-  async readFileAsDataUrl(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = reject
-      reader.readAsDataURL(file)
-    })
   }
 
   async onSubmit(e) {
     e.preventDefault()
     const form = e.target
     form.classList.remove('was-validated')
-    // trigger browser validation
     if (!form.checkValidity()) {
       form.classList.add('was-validated')
       return
@@ -36,29 +32,23 @@ class StoryForm extends LitElement {
 
     const description = form.querySelector('#description').value.trim()
     const photoInput = form.querySelector('#photo')
-    let photoDataUrl = null
-
-    if (photoInput.files && photoInput.files[0]) {
-      try {
-        photoDataUrl = await this.readFileAsDataUrl(photoInput.files[0])
-      } catch (err) {
-        console.error('Failed to read file', err)
-      }
-    }
-
-    const payload = { description, photoDataUrl }
+    const photoFile = photoInput.files[0]
 
     this.dispatchEvent(
       new CustomEvent('story-submitted', {
-        detail: payload,
+        detail: { description, photoFile },
         bubbles: true,
         composed: true,
       }),
     )
+  }
 
-    // reset form
-    form.reset()
-    form.classList.remove('was-validated')
+  reset() {
+    const form = this.querySelector('form')
+    if (form) {
+      form.reset()
+      form.classList.remove('was-validated')
+    }
   }
 
   render() {
@@ -88,7 +78,16 @@ class StoryForm extends LitElement {
         </div>
 
         <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary">Kirim</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            ?disabled=${this.loading}
+          >
+            ${this.loading
+              ? html`<span class="spinner-border spinner-border-sm me-2"></span
+                  >Mengirim...`
+              : 'Kirim'}
+          </button>
         </div>
       </form>
     `

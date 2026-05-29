@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit'
 import '../components/story-form.js'
 import '../components/custom-modal.js'
+import { addStory } from '../api/stories.js'
 
 class AddStoryPage extends LitElement {
   createRenderRoot() {
@@ -15,27 +16,32 @@ class AddStoryPage extends LitElement {
   }
 
   async onStorySubmitted(e) {
-    const { description, photoDataUrl } = e.detail
-    const newStory = {
-      id: `local-${Date.now()}`,
-      name: 'You',
-      description,
-      photoUrl: photoDataUrl,
-      createdAt: new Date().toISOString(),
-    }
+    const { description, photoFile } = e.detail
+    const storyForm = this.querySelector('story-form')
 
-    const existing = JSON.parse(localStorage.getItem('localStories') || '[]')
-    existing.unshift(newStory)
-    localStorage.setItem('localStories', JSON.stringify(existing))
+    if (storyForm) storyForm.loading = true
 
-    // notify dashboard
-    window.dispatchEvent(
-      new CustomEvent('local-story-added', { detail: newStory }),
-    )
+    try {
+      const formData = new FormData()
+      formData.append('description', description)
+      formData.append('photo', photoFile)
 
-    const modal = this.querySelector('custom-modal')
-    if (modal && typeof modal.show === 'function') {
-      modal.show()
+      await addStory(formData)
+
+      if (storyForm) {
+        storyForm.loading = false
+        storyForm.reset()
+      }
+
+      const modal = this.querySelector('custom-modal')
+      if (modal && typeof modal.show === 'function') {
+        modal.show()
+      }
+    } catch (err) {
+      if (storyForm) storyForm.loading = false
+      const message =
+        err.response?.data?.message || 'Gagal menambahkan story. Coba lagi.'
+      alert(message)
     }
   }
 
